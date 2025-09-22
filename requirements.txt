@@ -1,0 +1,5 @@
+langchain
+langchain_openai
+wikipedia
+pydantic
+langchain_community
