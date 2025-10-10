@@ -36,7 +36,16 @@ def check_palindrome(text: str) -> str:
     else:
         return f"The phrase or word '{text}' is not a palindrome."
     
-tools = [wikipedia_tool, date_checker, check_palindrome]
+@tool
+def check_if_penn_state_player(person: str) -> str:
+    """Check if a person is a Penn State football player."""
+    players=["Vic Thomp"]
+    if person in players:
+        return f"Yes, {person} is a Penn State football player."
+    else:
+        return f"No, {person} is not a Penn State football player."
+    
+tools = [check_if_penn_state_player, date_checker, check_palindrome]
 
 tool_node = ToolNode(tools)
 
@@ -102,7 +111,7 @@ def user_agent_multiturn(queries):
             {"messages": [HumanMessage(content=query)]}, config, stream_mode="messages") 
             if msg.content and not isinstance(msg, HumanMessage)) + "\n")
 
-queries = ["What happened on the 12 April 1961?", "What about 10 December 1948?",
-           "Is `Madam I'm Adam` a palindrome?", "What about `palladium stadium`?"]
+queries = ["Is `Madam I'm Adam` a palindrome?", "Is Bob Boney a Penn State football player?",
+           "Is Vic Thomp a Penn State football player?"]
 
 user_agent_multiturn(queries)
